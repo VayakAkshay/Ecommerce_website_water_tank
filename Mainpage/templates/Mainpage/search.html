@@ -1,0 +1,128 @@
+{% extends 'Mainpage/basic.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %} HOME - ROTO MOLDING {% endblock %}
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    {% block style %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+        .main-container{
+            margin-left: 100px;
+        }
+        .main-container .searchbar{
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main-container .searchbar form{
+            width: 50%;
+            display: flex;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        .main-container .searchbar form input{
+            height: 50px;
+            width: 80%;
+            font-size: 20px;
+        }
+        .main-container .searchbar form button{
+            margin-left: 10px;
+            margin-right: 10px;
+            padding: 10px;
+            background-color: hsl(231deg 48% 48%);
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+        .main-container .searchbar form button:hover{
+            background-color: black;
+            color: white;
+        }
+        .main-container .content{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            height: auto;
+            margin-top: 50px;
+        }
+        .main-container .content .box{
+            height: auto;
+            width: 370px;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            border-radius: 10px;
+            margin: 20px;
+        }
+        .main-container .content .box .imgpart{
+            height: auto;
+        }
+        .main-container .content .box .imgpart img{
+            width: 100%;
+        }
+        .main-container .content .box .discpart{
+            height: auto;
+            padding: 10px;
+        }
+        .main-container .content .box .btnpart{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+    </style>
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+    <div class="main-container">
+        <div class="searchbar">
+           <form action="/search/" method="post">{% csrf_token %}
+            <input type="text" name="query" id="query" class="form-control" id="">
+            <button type="submit">Search</button>
+           </form>
+        </div>
+        {% if product_data %}
+        <h4 style="text-align: center; margin-top: 30px;">Search results for  - {{search}}</h4>
+        <div class="content">
+            {% for i in product_data %}
+            <div class="box">
+                <div class="imgpart">
+                    <img src="/media/{{i.product_img}}" alt="">
+                </div>
+                <div class="discpart">
+                    <h5>{{i.product_name}}</h5>
+                    <h5>₹ {{i.product_price}}</h5>
+                </div>
+                <div class="btnpart">
+                    <a href=""><i style="font-size:24px" class="fa">&#xf004;</i></a>
+                        <form action="/cart/" method="post">{% csrf_token %}
+                            <input type="text" value="{{i.id}}" name="id" id="" hidden>
+                            <input type="text" value="1" name="qty" id="" hidden>
+                            <input type="text" value="{{i.product_price}}" name="amount" id="" hidden>
+                            <button type="submit" style="background-color: transparent; border: none;"><i style="font-size:24px" class="fa">&#xf07a;</i></button>
+                        </form>
+                        <a href="/myproduct/{{i.id}}"><i style="font-size:24px" class="fa">&#xf0c9;</i></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <h4 style="text-align: center; margin-top: 20px;">No any results found</h4>
+        {% endif %}
+    </div>
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+</html>
+{% block script %}
+{% endblock %}

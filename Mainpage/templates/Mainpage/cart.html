@@ -1,0 +1,137 @@
+{% extends 'Mainpage/basic.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %}My Cart - ROTO MOLDING {% endblock %}
+    {% block style %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+        .main {
+            padding: 20px;
+            margin-left: 100px;
+            font-family: 'Tilt Neon', cursive;
+            color: black;
+        }
+        .main .content{
+            height: auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .main .content .box{
+            height: auto;
+            width: 70%;
+            display: flex;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 10px;
+            margin: 20px;
+        }
+        .main .content .total_price{
+            width: 100%;
+            text-align: center;
+        }
+        .main .content .box .img-part{
+            width: 200px;
+            padding: 10px;
+        }
+        .main .content .box .img-part img{
+            width: 100%;
+            border-radius: 10px;
+        }
+        .main .content .box .desc-part{
+            height: 100%;
+            padding: 10px;
+            margin-left: 20px;
+        }
+        @media screen and (max-width: 900px) {
+            .main .content .box{
+                width: 90%;
+            }
+        }
+        @media screen and (max-width: 767px) {
+            .main{
+                margin-left: 0;
+            }
+        }
+        @media screen and (max-width: 500px) {
+            .main{
+                padding: 0px;
+            }
+            .main .content .box{
+                flex-wrap: wrap;
+                width: 98%;
+            }
+            .main .content .box .img-part{
+                width: 100%;
+                height: auto;
+            }
+            .main .content .box .desc-part{
+                width: 100%;
+            }
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+    {% if messages %}
+    <ul class="messages" id="message">
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="main">
+        {% if user.is_authenticated %}
+        <div class="content">
+            {% if cart_data %}
+            {% for i in cart_data %}
+            <div class="box">
+                <div class="img-part">
+                    <img src="/media/{{i.p_img}}" alt="">
+                </div>
+                <div class="desc-part">
+                    <h5>{{i.p_name}}</h5>
+                    <h6>Qty - {{i.qty}}</h6>
+                    <h6>Price - ₹ {{i.P_price}}</h6>
+                    <h6>Date - {{i.date}}</h6><br>
+                    <form action="/deleteitem/" method="post">{% csrf_token %}
+                        <input type="text" value="{{i.id}}" name="id" id="" hidden>
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="total_price">
+                <h4>Total - {{total_price}}</h4>
+                <br>
+                <a href="/order/"><button type="submit" class="btn btn-success">Order Now</button></a>
+            </div>
+            {% else %}
+            <h3>No any items in cart</h3>
+            {% endif %}
+        </div>
+        {% else %}
+        <h2 style="text-align: center;">Please First Login after the see the cart items</h2>
+        {% endif %}
+    </div>
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+{% block script %}
+<script>
+    
+</script>
+{% endblock %}

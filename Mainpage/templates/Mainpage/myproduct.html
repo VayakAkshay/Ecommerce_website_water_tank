@@ -1,0 +1,331 @@
+{% extends 'Mainpage/basic.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %} HOME - ROTO MOLDING {% endblock %}
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    {% block style %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+
+        .main-container {
+            border: 2px solid white;
+            margin-left: 100px;
+        }
+
+        .main-container .content {
+            height: auto;
+            margin-top: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-container .content .part1 {
+            height: 100%;
+            width: 40%;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .main-container .content .part1 img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .main-container .content .part2 {
+            height: 100%;
+            width: 50%;
+            font-family: 'Tilt Neon', cursive;
+            color: black;
+            padding: 10px;
+            margin: 20px;
+        }
+
+        .counter {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .counter input {
+            width: 50px;
+            border: 0;
+            line-height: 30px;
+            font-size: 20px;
+            text-align: center;
+            background: #0052cc;
+            color: #fff;
+            appearance: none;
+            outline: 0;
+        }
+
+        .counter span {
+            display: block;
+            font-size: 25px;
+            padding: 0 10px;
+            cursor: pointer;
+            color: #0052cc;
+            user-select: none;
+        }
+
+        .main-container .content .part2 .buybtn {
+            margin-top: 30px;
+        }
+
+        .main-container .content .part2 .buybtn button {
+            padding: 10px;
+            border: none;
+            background-color: #0052cc;
+            color: white;
+        }
+        .main {
+            margin-left: 100px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .reviews {
+            width: 50%;
+        }
+
+        .reviews .all_reviews {
+            border: none;
+            padding: 10px;
+        }
+        .reviews .all_reviews .my_review .header{
+            display: flex;
+        }
+
+        .reviews .all_reviews .my_review .header .box1 {
+            width: 8%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .reviews .all_reviews .my_review .header .box2{
+            width: 90%;
+            display: flex;
+            align-items: center;
+        }
+
+        @media screen and (max-width: 950px) {
+            .main-container .content .part1 {
+                width: 60%;
+                height: auto;
+            }
+
+            .main-container .content .part2 {
+                height: auto;
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            .main-container .content .part1 {
+                width: 80%;
+                height: auto;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            .main-container {
+                margin-left: 0;
+            }
+            .main{
+                margin-left: 0;
+            }
+            .reviews{
+                width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 400px) {
+            .main-container .content .part1 {
+                width: 95%;
+                height: auto;
+            }
+            .reviews{
+                width: 97%;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            .reviews .forms form {
+                width: 90%;
+            }
+
+            .reviews .all_reviews .my_review {
+                width: 90%;
+            }
+
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+    <div class="main-container">
+        <div class="content">
+            {% for i in product_data %}
+            <div class="part1">
+                <img src="/media/{{i.product_img}}" alt="">
+            </div>
+            <div class="part2">
+                <div class="heading">
+                    <h2>{{i.product_name}}</h2>
+                    <h5>{{i.product_desc}}</h5><br>
+                    <h4>Price - ₹ {{i.product_price}}</h4><br>
+                </div>
+                <div class="counter">
+                    <span class="down" onClick='decreaseCount(event, this)'>-</span>
+                    <input type="text" value="1">
+                    <span class="up" onClick='increaseCount(event, this)'>+</span>
+                </div>
+                <div class="buybtn">
+                    <form action="/cart/" method="post">{% csrf_token %}
+                        <input type="text" value="{{i.id}}" name="id" id="" hidden>
+                        <input type="text" value="1" name="qty" id="qtys" hidden>
+                        <input type="text" value="{{i.product_price}}" name="amount" id="" hidden>
+                        <button type="submit">Buy Now</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="main">
+        <div class="reviews">
+            {% if user.is_authenticated %}
+            {% for i in product_data %}
+            <h3 style="color: #de5824; text-align: center;">Rating</h3>
+            <div class="forms">
+                <form action="/Review-page/" method="post">{% csrf_token %}
+                    <div class="mb-3">
+                        <label for="" class="form-label">Add Rating</label>
+                        <div class="rating">
+                            <span class="rating__result" id="results" hidden></span>
+                            <i class="rating__star far fa-star"></i>
+                            <i class="rating__star far fa-star"></i>
+                            <i class="rating__star far fa-star"></i>
+                            <i class="rating__star far fa-star"></i>
+                            <i class="rating__star far fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="" class="form-label">Enter Review</label>
+                        <textarea class="form-control" id="" name="review" rows="3"
+                            required></textarea>
+                    </div>
+                    <input type="text" name="result" id="myresult" hidden>
+                    <input type="text" name="product_id" value="{{i.id}}" id="event" hidden>
+                    <input type="text" name="username" value="{{user.first_name}}" id="name" hidden>
+                    <button type="submit" id="submits" class="btn btn-primary mb-3">Submit</button>
+                </form>
+            </div>
+            {% endfor %}
+            {% else %}
+            <h4 style="text-align: center; padding: 20px;">First go to login after then give reviews</h4>
+            {% endif %}
+            <div class="all_reviews">
+                {% for i in reviews_data %}
+                <div class="my_review">
+                    <div class="header">
+                        <div class="box1">
+                            <i style='font-size:35px;' class='far'>&#xf2bd;</i>
+                        </div>
+                        <div class="box2">
+                            <h5>{{i.reviewer_name}}</h5>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <div class="ratings" style="margin-left: 50px;">
+                            {% for j in i.stars|make_list %}
+                            <i style="font-size: 25px; color: #de5824;" class="fa fa-star"></i>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="text-content" style="margin-left: 50px;">
+                        <p>{{i.review_text}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+{% block script %}
+<script>
+    function increaseCount(a, b) {
+        var input = b.previousElementSibling;
+        var value = parseInt(input.value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        input.value = value;
+        document.getElementById("qtys").value = value;
+    }
+
+    function decreaseCount(a, b) {
+        var input = b.nextElementSibling;
+        var value = parseInt(input.value, 10);
+        if (value > 1) {
+            value = isNaN(value) ? 0 : value;
+            value--;
+            input.value = value;
+            document.getElementById("qtys").value = value;
+        }
+    }
+
+    const ratingStars = [...document.getElementsByClassName("rating__star")];
+    const ratingResult = document.querySelector(".rating__result");
+
+    printRatingResult(ratingResult);
+
+    function executeRating(stars, result) {
+        const starClassActive = "rating__star fas fa-star";
+        const starClassUnactive = "rating__star far fa-star";
+        const starsLength = stars.length;
+        let i;
+        stars.map((star) => {
+            star.onclick = () => {
+                i = stars.indexOf(star);
+
+                if (star.className.indexOf(starClassUnactive) !== -1) {
+                    printRatingResult(result, i + 1);
+                    for (i; i >= 0; --i) stars[i].className = starClassActive;
+                } else {
+                    printRatingResult(result, i);
+                    for (i; i < starsLength; ++i) stars[i].className = starClassUnactive;
+                }
+            };
+        });
+    }
+
+    function printRatingResult(result, num = 0) {
+        result.textContent = `${num}/5`;
+    }
+
+    executeRating(ratingStars, ratingResult);
+    document.getElementById("submits").addEventListener("click", () => {
+        const rating = document.getElementById("results").innerText
+        const rating_star = rating.slice(0, 1)
+        document.getElementById("myresult").setAttribute('value', rating_star);
+    })
+</script>
+{% endblock %}

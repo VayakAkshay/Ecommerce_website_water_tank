@@ -1,0 +1,143 @@
+{% extends 'Mainpage/basic.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %} profile - {{user.first_name}} {% endblock %}
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    {% block style %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+        .main{
+            margin-left: 100px;
+        }
+        .main .options{
+            height: 100px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main .options button{
+            margin-left: 10px;
+            margin-right: 10px;
+            padding: 10px;
+            background-color: hsl(231deg 48% 48%);
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+        .main .options button:hover{
+            color: white;
+        }
+        .main .content{
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .main .content .userprofile {
+            width: 80%;
+            display: flex;
+            padding: 20px;
+        }
+
+        .main .content .userprofile .images {
+            width: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main .content .userprofile .userdetails {
+            width: 50%;
+            color: black;
+        }
+        .main .content .userprofile .editbtn {
+            width: 30%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main .content .btn{
+            width: 80%;
+            margin-top: 20px;
+        }
+        @media screen and (max-width: 767px) {
+            .main{
+                margin-left: 0;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .main .content{
+                height: 400px;
+            }
+            .main .content .userprofile {
+                height: 400px;
+                padding: 0;
+                flex-wrap: wrap;
+            }
+
+            .main .content .userprofile .images {
+                height: 35%;
+                width: 100%;
+            }
+
+            .main .content .userprofile .userdetails {
+                height: 35%;
+                width: 100%;
+                text-align: center;
+            }
+
+            .main .content .userprofile .editbtn {
+                height: 30%;
+                width: 100%;
+            }
+        }
+    </style>
+    {% endblock %}
+</head>
+<body>
+    {% block body %} 
+    <div class="main">
+        <div class="options">
+            <a href="/profile/"><button>Profile</button></a>
+            <a href="/orders/"><button>My Orders</button></a>
+            <a href="/wishlist/"><button>Wishlist</button></a>
+        </div>
+        <div class="content">
+                <div class="userprofile" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; border-radius: 20px;">
+                    <div class="images">
+                        <div class="userimg">
+                            <i style='font-size:100px' class='fas'>&#xf406;</i>
+                        </div>
+                    </div>
+                    <div class="userdetails">
+                        <h5>{{user.first_name}} {{user.last_name}}</h5>
+                        <h5>{{user.username}}</h5>
+                        <h5>{{user.email}}</h5>
+                    </div>
+                    <div class="editbtn">
+                        <a href="/edit-profile/"><button type="button" id="main_btn" class="btn btn-primary">Edit profile</button></a>
+                    </div>
+                </div>
+                <div class="btn">
+                    <a href="/logout/"><button type="button" class="btn btn-primary">Logout</button></a>
+                </div>
+        </div>
+    </div>
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+{% block script %}
+{% endblock %}

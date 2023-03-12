@@ -1,0 +1,123 @@
+{% extends 'Mainpage/basic.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %} HOME - ROTO MOLDING {% endblock %}
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    {% block style %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap');
+        .main-container {
+            border: 2px solid white;
+            margin-left: 100px;
+        }
+        .main-container h2{
+            text-align: center;
+        }
+        .main-container .content{
+            height: auto;
+            margin-top: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .main-container .content .part1{
+            height: 100%;
+            width: 50%;
+        }
+        .main-container .content .part1 img{
+            width: 100%;
+        }
+        .main-container .content .part2{
+            height: 100%;
+            width: 50%;
+            font-family: 'Tilt Neon', cursive;
+            color: black;
+            padding: 10px;
+        }
+        .main-container .content2{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .main-container .content2 .address{
+            height: auto;
+            width: 50%;
+            border: 2px solid black;
+            padding: 20px;
+        }
+        @media screen and (max-width: 950px) {
+            .main-container .content .part1{
+                width: 60%;
+                height: auto;
+            }
+            .main-container .content .part2{
+                height: auto;
+                width: 100%;
+            }
+        }
+        @media screen and (max-width: 800px) {
+            .main-container .content .part1{
+                width: 80%;
+                height: auto;
+            }
+        }
+        @media screen and (max-width: 767px) {
+            .main-container{
+                margin-left: 0;
+            }
+            .main-container .content2 .address{
+                width: 100%;
+            }
+        }
+        @media screen and (max-width: 400px) {
+            .main-container .content .part1{
+                width: 95%;
+                height: auto;
+            }
+        }
+    </style>
+    {% endblock %}
+</head>
+<body>
+    {% block body %} 
+    <div class="main-container">
+        <h2>About Us</h2>
+        <div class="content">
+            <div class="part1">
+                <img src="{% static 'images/about.png' %}" alt="">
+            </div>
+            <div class="part2">
+                <h5>We are energetic about discovering things that transcend the commonplace; that we think will get your attention and capture it. In addition, to convey these to you wherever you are and at whatever point you believe you have sufficient energy to enjoy a bit.
+                    <br><br>
+                    So we made an organization to bring you items you will become hopelessly enamored with; to allow you to make your very own space, to take advantage of those concealed abilities and make your own looks and accumulations; to enable you to impart your manifestations to companions to understand that second conclusion, to move or be enlivened; and to enable you to shop such that you will discover hypnotizing.
+                    <br><br>
+                    We like to consider ‘Organization Name’ as the advanced age likeness the sixteenth Century Grand Trunk Road, an expressway that changed the essence of exchange the US subcontinent.
+                    
+                    </h5>
+            </div>
+        </div>
+        <div class="content2">
+            <div class="address">
+                <h5>Address:</h5>
+                <h6>No 6. ICON INDUSTRIES, KATHVADA, VASTRAL, AHMEDABAD 380038</h6>
+            </div>
+        </div>
+    </div>   
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+{% block script %}
+{% endblock %}

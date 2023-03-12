@@ -1,0 +1,374 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://kit.fontawesome.com/6e04d39f81.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="{% static 'images/logo2.jpg' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        :root {
+            --first-color: hsl(228, 81%, 49%);
+            --title-color: hsl(228, 12%, 15%);
+            --text-color: hsl(228, 8%, 50%);
+            --body-color: hsl(228, 100%, 99%);
+            --container-color: #fff;
+            --body-font: 'Poppins', sans-serif;
+            --normal-font-size: .938rem;
+        }
+
+        .nav {
+            z-index: 10;
+        }
+
+        .footer-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: 100px;
+        }
+
+        @media screen and (min-width: 968px) {
+            :root {
+                --normal-font-size: 1rem;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            position: relative;
+            font-family: var(--body-font);
+            font-size: var(--normal-font-size);
+            background-color: white;
+            color: var(--text-color);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .container {
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+
+        .section {
+            padding: 2rem 0;
+        }
+
+        @media screen and (max-width: 767px) {
+
+            .nav__logo,
+            .nav__toggle,
+            .nav__name {
+                display: none;
+            }
+
+            .nav__list {
+                position: fixed;
+                bottom: 2rem;
+                background-color: var(--container-color);
+                box-shadow: 0 8px 24px hsla(228, 81%, 24%, .15);
+                width: 90%;
+                padding: 30px 40px;
+                border-radius: 1rem;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                column-gap: 36px;
+                transition: .4s;
+                z-index: 10;
+            }
+        }
+
+        .nav__link {
+            display: flex;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: .3s;
+        }
+
+        .nav__link i {
+            font-size: 1.25rem;
+        }
+
+        .nav__link:hover {
+            color: var(--first-color);
+        }
+
+        .active-link {
+            color: var(--first-color);
+        }
+
+        @media screen and (max-width: 320px) {
+            .nav__list {
+                column-gap: 20px;
+            }
+        }
+
+        @media screen and (min-width: 576px) {
+            .nav__list {
+                width: 332px;
+            }
+        }
+
+        @media screen and (min-width: 767px) {
+            .container {
+                margin-left: 7rem;
+                margin-right: 1.5rem;
+            }
+
+            .nav {
+                position: fixed;
+                left: 0;
+                background-color: var(--container-color);
+                box-shadow: 1px 0 4px hsla(228, 81%, 49%, .15);
+                width: 90px;
+                height: 100vh;
+                padding: 2rem;
+                transition: .3s;
+            }
+
+            .nav__logo {
+                display: flex;
+            }
+
+            .nav__logo i {
+                font-size: 1.25rem;
+                color: var(--first-color);
+            }
+
+            .nav__logo-name {
+                color: var(--title-color);
+                font-weight: 600;
+            }
+
+            .nav__logo,
+            .nav__link {
+                align-items: center;
+                column-gap: 1rem;
+            }
+
+            .nav__list {
+                display: grid;
+                row-gap: 2.5rem;
+                margin-top: 10.5rem;
+                z-index: 10;
+            }
+
+            .nav__content {
+                overflow: hidden;
+                height: 100%;
+            }
+
+            .nav__toggle {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                background-color: var(--title-color);
+                color: #fff;
+                border-radius: 50%;
+                font-size: 1.20rem;
+                display: grid;
+                place-items: center;
+                top: 2rem;
+                right: -10px;
+                cursor: pointer;
+                transition: .4s;
+            }
+        }
+
+        .show-menu {
+            width: 255px;
+        }
+
+        .rotate-icon {
+            transform: rotate(180deg);
+        }
+
+        @media screen and (min-width: 2048px) {
+            body {
+                zoom: 1.7;
+            }
+        }
+
+        @media screen and (min-width: 3840px) {
+            body {
+                zoom: 2.5;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            .footer-page {
+                margin-left: 0;
+            }
+        }
+
+        .messages {
+            margin-left: 100px;
+            width: 87%;
+        }
+
+        @media screen and (max-width : 767px) {
+            .messages {
+                margin-left: 0;
+                width: 97%;
+            }
+        }
+    </style>
+    {% block style %}
+    {% endblock %}
+</head>
+
+<body>
+    <div class="nav" id="nav">
+        <nav class="nav__content">
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-chevron-right'></i>
+            </div>
+            <a href="/" class="nav__logo">
+                <img style="height: 30px; width: 30px;" src="{% static 'images/logo2.jpg' %}" alt="">
+                <span class="nav__logo-name">KULDEVI INDUSTRIES</span>
+            </a>
+            <div class="nav__list">
+                <a href="/" class="nav__link active-link">
+                    <i class="fa fa-home" style="font-size: 25px;"></i>
+                    <span class="nav__name">Home</span>
+                </a>
+                <a href="/about/" class="nav__link">
+                    <i style="font-size:24px" class="fa">&#xf08e;</i>
+                    <span class="nav__name">About Us</span>
+                </a>
+                <a href="/products/" class="nav__link">
+                    <i style="font-size:24px" class="fa">&#xf1a5;</i>
+                    <span class="nav__name">Products</span>
+                </a>
+                <a href="/search/" class="nav__link">
+                    <i style="font-size:24px" class="fa">&#xf002;</i>
+                    <span class="nav__name">Search</span>
+                </a>
+                <a href="/cart/" class="nav__link">
+                    <i style="font-size:24px" class="fa">&#xf07a;</i>
+                    <span class="nav__name">Cart</span>
+                </a>
+                {% if user.is_authenticated %}
+                <a href="/profile/" class="nav__link">
+                    <i style='font-size:24px' class='fas'>&#xf406;</i>
+                    <span class="nav__name">{{user.first_name}}</span>
+                </a>
+                {% else %}
+                <a href="/login/" class="nav__link">
+                    <i style='font-size:24px' class='fas'>&#xf406;</i>
+                    <span class="nav__name">Login</span>
+                </a>
+                {% endif %}
+            </div>
+        </nav>
+    </div>
+    {% block body %}
+    {% endblock %}
+    <div class="footer-page">
+        <div class="my-5" style="width: 95%">
+            <footer class="text-center text-white" style="background-color: #3f51b5">
+                <div class="">
+                    <h3 style="text-align: center; padding: 10px;">KULDEVI INDUSTRIES</h3>
+                    <h5 style="text-align: center;">ADDRESS</h5>
+                    <h5 style="text-align: center;">No 6. ICON INDUSTRIES, KATHVADA, VASTRAL, AHMEDABAD 380038</h5>
+                    <section class="mt-5">
+                        <div class="d-flex justify-content-center pt-5" style="width: 100%; align-items: center; ">
+                            <a style="margin-left: 10px; margin-right: 10px;" href="#!" class="text-white">Home</a>
+                            <a style="margin-left: 10px; margin-right: 10px;" href="#!" class="text-white">About us</a>
+                            <a style="margin-left: 10px; margin-right: 10px;" href="#!" class="text-white">Products</a>
+                            <a style="margin-left: 10px; margin-right: 10px;" href="#!" class="text-white">Wishlist</a>
+                            <a style="margin-left: 10px; margin-right: 10px;" href="#!" class="text-white">Contact
+                                Us</a>
+                        </div>
+                    </section>
+
+                    <hr class="my-5" />
+                    <section class="mb-5">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-lg-8">
+                                <p>
+                                    A good water tank company should offer a wide range of products that cater to different needs and budgets. These can include plastic water tanks, steel water tanks, underground water tanks, and more.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="text-center mb-5">
+                        <a href="" class="text-white me-4">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="" class="text-white me-4">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="" class="text-white me-4">
+                            <i class="fab fa-google"></i>
+                        </a>
+                        <a href="" class="text-white me-4">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="" class="text-white me-4">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="" class="text-white me-4">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </section>
+                </div>
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+                    © 2020 Copyright:
+                    <a class="text-white" href="https://mdbootstrap.com/">rotomolding.com</a>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+<script>
+    const linkColor = document.querySelectorAll('.nav__link')
+    function colorLink() {
+        linkColor.forEach(l => l.classList.remove('active-link'))
+        this.classList.add('active-link')
+    }
+    linkColor.forEach(l => l.addEventListener('click', colorLink))
+    const showMenu = (toggleId, navbarId) => {
+        const toggle = document.getElementById(toggleId),
+            navbar = document.getElementById(navbarId)
+        if (toggle && navbar) {
+            toggle.addEventListener('click', () => {
+                navbar.classList.toggle('show-menu')
+                toggle.classList.toggle('rotate-icon')
+            })
+        }
+    }
+    showMenu('nav-toggle', 'nav')
+
+    if (document.getElementById("message")) {
+        setTimeout(function () {
+            document.getElementById("message").style.display = "none";
+        }, 3000);
+    }
+</script>
+{% block script %}
+{% endblock %}

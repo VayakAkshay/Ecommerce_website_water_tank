@@ -1,0 +1,772 @@
+{% extends 'Mainpage/basic.html' %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %} HOME - ROTO MOLDING {% endblock %}
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    {% block style %}
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Josefin+Sans:300,400);
+
+        * {
+            scroll-behavior: smooth;
+        }
+
+        .part-container {
+            height: auto;
+            width: 90%;
+            margin-left: 100px;
+        }
+
+        .crousal-container {
+            padding: 50px;
+        }
+
+        .crousal-container .main-crousals {
+            height: 400px;
+            width: 85%;
+            margin-left: 10%;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            border-radius: 10px;
+        }
+
+        .main-crousals .carousel-inner .carousel-item img {
+            height: 400px;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .crousal-container .scrollbtn {
+            height: 100px;
+            margin-top: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            transition-duration: 2s;
+        }
+
+        section {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        section::after {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            content: '';
+            width: 100%;
+            height: 80%;
+        }
+
+        section h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 2;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font: normal 300 64px/1 'Josefin Sans', sans-serif;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        #thanks {
+            background-color: #fff;
+        }
+
+        #thanks::after {
+            content: none;
+        }
+
+        #thanks div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 2;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        #thanks h2 {
+            margin-bottom: 60px;
+            color: #333;
+            font: normal 300 64px/1 'Josefin Sans', sans-serif;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        #thanks p {
+            color: #333;
+            font: normal 400 20px/1 'Josefin Sans', sans-serif;
+        }
+
+        #thanks p a {
+            color: #333;
+            text-decoration: none;
+            transition: color .3s;
+        }
+
+        #thanks p a:hover {
+            color: #888;
+        }
+
+        .demo a {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            z-index: 2;
+            display: inline-block;
+            -webkit-transform: translate(0, -50%);
+            transform: translate(0, -50%);
+            color: #fff;
+            font: normal 400 20px/1 'Josefin Sans', sans-serif;
+            letter-spacing: .1em;
+            text-decoration: none;
+            transition: opacity .3s;
+        }
+
+        .demo a:hover {
+            opacity: .5;
+        }
+
+        #section10 a {
+            padding-top: 60px;
+        }
+
+        #section10 a span {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 30px;
+            height: 50px;
+            margin-left: -15px;
+            border: 2px solid black;
+            border-radius: 50px;
+            box-sizing: border-box;
+        }
+
+        #section10 a span::before {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            content: '';
+            width: 6px;
+            height: 6px;
+            margin-left: -3px;
+            background-color: black;
+            border-radius: 100%;
+            -webkit-animation: sdb10 2s infinite;
+            animation: sdb10 2s infinite;
+            box-sizing: border-box;
+        }
+
+        @-webkit-keyframes sdb10 {
+            0% {
+                -webkit-transform: translate(0, 0);
+                opacity: 0;
+            }
+
+            40% {
+                opacity: 1;
+            }
+
+            80% {
+                -webkit-transform: translate(0, 20px);
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes sdb10 {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+
+            40% {
+                opacity: 1;
+            }
+
+            80% {
+                transform: translate(0, 20px);
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .part-container .main-part {
+            padding: 20px;
+        }
+
+        .part-container .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .part-container .content {
+            height: auto;
+            width: 400px;
+            margin: 20px;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            border-radius: 10px;
+        }
+
+        .part-container .content .img-part {
+            height: 70%;
+            width: 100%;
+        }
+
+        .part-container .content .img-part img {
+            width: 100%;
+        }
+
+        .part-container .content .btn-part {
+            height: auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .part-container .items {
+            height: auto;
+            width: 100%;
+            margin-top: 50px;
+            font-family: 'Nunito', sans-serif;
+            padding: 20px;
+        }
+
+        .part-container .items .cards {
+            height: auto;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            scrollbar-width: thin;
+            scrollbar-color: rgb(68, 112, 231);
+        }
+
+        .part-container .items .cards::-webkit-scrollbar {
+            width: 16px;
+        }
+
+        .part-container .items .cards::-webkit-scrollbar-track {
+            background: #ffffff;
+        }
+
+        .part-container .items .cards::-webkit-scrollbar-thumb {
+            background-color: #b0d6e9;
+            border-radius: 10px;
+            border: 3px solid #ffffff;
+        }
+
+        .part-container .items .cards .card {
+            height: auto;
+            width: 300px;
+            display: inline-block;
+            overflow: hidden;
+            margin-right: 20px;
+            border-radius: 10px;
+            border: none;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        }
+
+        .part-container .items .cards .card .card-img {
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .part-container .items .cards .card .card-img img {
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        .part-container .items .cards .card .card-content {
+            height: auto;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .part-container .items .cards .card .card-content .heading {
+            height: auto;
+            width: 100%;
+            display: block;
+            white-space: pre-line;
+        }
+
+        .part-container .items .cards .card .card-content .buttons {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .main {
+            height: auto;
+            font-family: 'Open Sans', sans-serif;
+            padding: 50px;
+            margin-left: 100px;
+        }
+
+        .main .clientpage {
+            height: auto;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .main .clientpage .heading {
+            width: 100%;
+        }
+
+        .main .clientpage section {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .testimonial-card {
+            min-height: 400px;
+            width: 29%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .3);
+            display: flex;
+            flex-flow: column;
+            justify-content: space-between;
+            margin: 20px;
+        }
+
+        .text {
+            padding: 2.2em;
+            line-height: 1.7em;
+            position: relative;
+            font-size: 18px;
+        }
+
+        .images {
+            background-color: tomato;
+            height: 120px;
+            width: 120px;
+            border-radius: 50%;
+            border: 5px solid white;
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+
+        }
+
+        .images img {
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+        }
+
+        .footer {
+            background: linear-gradient(90deg, #1a2B96 0%, #d22B96 100%);
+            height: 140px;
+            border-radius: 0 0 10px 10px;
+            position: relative;
+
+        }
+
+        .quote {
+            font-size: 400%;
+            float: right;
+            opacity: .1;
+            transform: rotate(10deg) translate(-10px, -40px);
+            color: #4D3FA3;
+        }
+
+        .person {
+            color: white;
+            position: absolute;
+            top: 60%;
+            font-size: 20px;
+            font-weight: 600;
+            width: 100%;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 1150px) {
+            .testimonial-card {
+                width: 45%;
+            }
+        }
+
+        @media screen and (max-width: 950px) {
+            .testimonial-card {
+                width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            .part-container {
+                width: 100%;
+            }
+        }
+
+        @media screen and (max-width:600px) {
+            .main {
+                padding: 10px;
+                margin-top: 150px;
+            }
+
+            .testimonial-card {
+                width: 98%;
+                margin-right: 10px;
+                margin-left: 10px;
+                margin-top: 0;
+
+            }
+
+            .main .clientpage {
+                padding: 0;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            .text {
+                padding: 10px;
+            }
+
+            .carousel .carousel-inner .carousel-item .carousel-caption h5 {
+                font-size: 15px;
+            }
+        }
+
+        @media screen and (max-width: 1100px) {
+            .crousal-container .main-crousals {
+                width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 1000px) {
+            .crousal-container .main-crousals {
+                width: 90%;
+            }
+        }
+
+        @media screen and (max-width : 992px) {
+            .part-container .content {
+                width: 400px;
+            }
+
+            .part-container .main-part h2 {
+                text-align: center;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            .crousal-container .main-crousals {
+                height: 300px;
+            }
+
+            .main-crousals .carousel-inner .carousel-item img {
+                height: 300px;
+            }
+        }
+
+        @media screen and (max-width: 767px) {
+            .crousal-container .main-crousals {
+                margin-left: 0;
+                width: 100%;
+            }
+
+            .main {
+                margin-left: 0;
+                z-index: 1;
+            }
+
+            .crousal-container .scrollbtn {
+                margin-left: 0;
+            }
+
+            .part-container {
+                margin-left: 0;
+            }
+        }
+
+        @media screen and (max-width : 650px) {
+            .crousal-container {
+                padding: 10px;
+                padding-top: 50px;
+            }
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body>
+    {% block body %}
+    {% if messages %}
+    <ul class="messages" id="message">
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div class="crousal-container">
+        <div id="carouselDarkVariant" class="main-crousals carousel slide carousel-fade carousel-dark relative"
+            data-bs-ride="carousel">
+            <div class="carousel-inner relative w-full overflow-hidden">
+                <div class="carousel-item active relative float-left w-full" style=" height: 100vh; width: 100%;">
+                    <img src="{% static 'images/1.png' %}" class="block w-full" alt="Motorbike Smoke" />
+                </div>
+
+                <div class="carousel-item relative float-left w-full" style=" height: 100vh; width: 100%;">
+                    <img src="{% static 'images/2.png' %}" class="block w-full" alt="Mountaintop" />
+                </div>
+
+                <div class="carousel-item relative float-left w-full" style=" height: 100vh; width: 100%;">
+                    <img src="{% static 'images/4.png' %}" class="block w-full" alt="" />
+                </div>
+
+            </div>
+            <button
+                class="carousel-control-prev absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline left-0"
+                type="button" data-bs-target="#carouselDarkVariant" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+                class="carousel-control-next absolute top-0 bottom-0 flex items-center justify-center p-0 text-center border-0 hover:outline-none hover:no-underline focus:outline-none focus:no-underline right-0"
+                type="button" data-bs-target="#carouselDarkVariant" data-bs-slide="next">
+                <span class="carousel-control-next-icon inline-block bg-no-repeat" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <div class="scrollbtn">
+            <section id="section10" class="demo">
+                <a href="#main" style="color: black;"><span></span>Scroll</a>
+            </section>
+        </div>
+    </div>
+    <div class="part-container">
+        <div class="main-part" id="main">
+            <h2 style="padding: 20px">Best Seller</h2>
+            <div class="main-content">
+                {% for i in product_data %}
+                {% if i.product_cat == "Best" %}
+                <div class="content">
+                    <div class="img-part">
+                        <img src="/media/{{i.product_img}}" alt="">
+                    </div>
+                    <div class="descc" style="padding: 10px;">
+                        <h5>{{i.product_name}}</h5>
+                        <p>₹ {{i.product_price}}</p>
+                    </div>
+                    <div class="btn-part">
+                        {% if user.is_authenticated %}
+                        {% if i.wish_status == True %}
+                        <a href="/wishlist/"><i style="font-size:24px; color: red;" class="fa">&#xf004;</i></a>
+                        {% else %}
+                        <form action="/wishlist/" method="post">{% csrf_token %}
+                            <input type="text" value="{{i.id}}" name="id" id="" hidden>
+                            <button type="submit" style="border: none; background-color: transparent;">
+                                <i style='font-size:24px' class='far'>&#xf004;</i>
+                            </button>
+                        </form>
+                        {% endif %}
+                        {% else %}
+                        <a href="/wishlist/"><i style="font-size:24px;" class="fa">&#xf004;</i></a>
+                        {% endif %}
+                        <form action="/cart/" method="post">{% csrf_token %}
+                            <input type="text" value="{{i.id}}" name="id" id="" hidden>
+                            <input type="text" value="1" name="qty" id="" hidden>
+                            <input type="text" value="{{i.product_price}}" name="amount" id="" hidden>
+                            <button type="submit" style="background-color: transparent; border: none;"><i
+                                    style="font-size:24px" class="fa">&#xf07a;</i></button>
+                        </form>
+                        <a href="/myproduct/{{i.id}}"><i style="font-size:24px" class="fa">&#xf0c9;</i></a>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="items">
+            <h2 style="margin: 20px;">Horizontal Tanks</h2>
+            <div class="cards">
+                {% for i in product_data %}
+                {% if i.product_cat == "Horizontal" %}
+                <div class="card">
+                    <div class="card-img">
+                        <img style="height: 100%; width: 100%;" src="media/{{i.product_img}}" alt="">
+                    </div>
+                    <div class="card-content">
+                        <div class="heading">
+                            <h6><b>{{i.product_name}}</b></h6>
+                            <p><b>₹ {{i.product_price}}</b></p>
+                        </div>
+                        <div class="buttons">
+                            {% if user.is_authenticated %}
+                            {% if i.wish_status == True %}
+                            <a href="/wishlist/"><i style="font-size:24px; color: red;" class="fa">&#xf004;</i></a>
+                            {% else %}
+                            <form action="/wishlist/" method="post">{% csrf_token %}
+                                <input type="text" value="{{i.id}}" name="id" id="" hidden>
+                                <button type="submit" style="border: none; background-color: transparent;">
+                                    <i style='font-size:24px' class='far'>&#xf004;</i>
+                                </button>
+                            </form>
+                            {% endif %}
+                            {% else %}
+                            <a href="/wishlist/"><i style="font-size:24px;" class="fa">&#xf004;</i></a>
+                            {% endif %}
+                            <form action="/cart/" method="post">{% csrf_token %}
+                                <input type="text" value="{{i.id}}" name="id" id="" hidden>
+                                <input type="text" value="1" name="qty" id="" hidden>
+                                <input type="text" value="{{i.product_price}}" name="amount" id="" hidden>
+                                <button type="submit" style="background-color: transparent; border: none;"><i
+                                        style="font-size:24px" class="fa">&#xf07a;</i></button>
+                            </form>
+                            <a href="/myproduct/{{i.id}}"><i style="font-size:24px" class="fa">&#xf0c9;</i></a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="items" style="margin-top: 150px;">
+            <h2 style="margin: 20px;">Vertical Tanks</h2>
+            <div class="cards">
+                {% for i in product_data %}
+                {% if i.product_cat == "Vertical" %}
+                <div class="card">
+                    <div class="card-img">
+                        <img style="height: 100%; width: 100%;" src="media/{{i.product_img}}" alt="">
+                    </div>
+                    <div class="card-content">
+                        <div class="heading">
+                            <h6><b>{{i.product_name}}</b></h6>
+                            <p><b>₹ {{i.product_price}}</b></p>
+                        </div>
+                        <div class="buttons">
+                            {% if user.is_authenticated %}
+                            {% if i.wish_status == True %}
+                            <a href="/wishlist/"><i style="font-size:24px; color: red;" class="fa">&#xf004;</i></a>
+                            {% else %}
+                            <form action="/wishlist/" method="post">{% csrf_token %}
+                                <input type="text" value="{{i.id}}" name="id" id="" hidden>
+                                <button type="submit" style="border: none; background-color: transparent;">
+                                    <i style='font-size:24px' class='far'>&#xf004;</i>
+                                </button>
+                            </form>
+                            {% endif %}
+                            {% else %}
+                            <a href="/wishlist/"><i style="font-size:24px;" class="fa">&#xf004;</i></a>
+                            {% endif %}
+                            <form action="/cart/" method="post">{% csrf_token %}
+                                <input type="text" value="{{i.id}}" name="id" id="" hidden>
+                                <input type="text" value="1" name="qty" id="" hidden>
+                                <input type="text" value="{{i.product_price}}" name="amount" id="" hidden>
+                                <button type="submit" style="background-color: transparent; border: none;"><i
+                                        style="font-size:24px" class="fa">&#xf07a;</i></button>
+                            </form>
+                            <a href="/myproduct/{{i.id}}"><i style="font-size:24px" class="fa">&#xf0c9;</i></a>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="main">
+        <div class="clientpage">
+            <div class="heading">
+                <h2 style="color: red; text-align: center;">What Our Client Says</h2>
+            </div>
+            <section>
+                <div class="testimonial-card">
+                    <div class="text">I was hesitant to buy a water tank online, but after reading the reviews and doing
+                        some research, I decided to give this website a try. I'm so glad I did! The customer service was
+                        excellent and they helped me choose the right size tank for my needs. The tank arrived in
+                        perfect condition and was easy to install.<i class="fas fa-quote-right quote"></i></div>
+                    <div class="footer">
+                        <div class="images">
+                            <img src="{% static 'images/male.jpg' %}" alt="">
+                        </div>
+                        <h3 class='person'>Zeel Trivedi
+                        </h3>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="text">"I recently purchased a water tank from this website and I'm very satisfied with
+                        my purchase. The tank was delivered quickly and was exactly what I needed. The quality of the
+                        tank is excellent and it has been working perfectly since I installed it.<i
+                            class="fas fa-quote-right quote"></i></div>
+                    <div class="footer">
+                        <div class="images">
+                            <img src="{% static 'images/female.jpg' %}" alt="">
+                        </div>
+                        <h3 class='person'>Harvy Purohit
+                        </h3>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="text">I had a great experience buying a water tank from this website. The website was
+                        easy to navigate and the checkout process was quick and simple. The tank arrived in a timely
+                        manner and was exactly as described. I'm very happy with my purchase and would buy from this
+                        website again.<i class="fas fa-quote-right quote"></i></div>
+                    <div class="footer">
+                        <div class="images">
+                            <img src="{% static 'images/men1.jpg' %}" alt="">
+                        </div>
+                        <h3 class='person'>Dhrumit Vyas</h3>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+{% block script %}
+{% endblock %}
