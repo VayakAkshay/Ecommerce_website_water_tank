@@ -122,7 +122,7 @@
                     {% endif %}
                     <form action="/cart/" method="post">{% csrf_token %}
                         <input type="text" value="{{i.id}}" name="id" id="" hidden>
-                        <input type="text" value="1" name="qty" id="" hidden>
+                        <input type="number" value="1" name="qty" id="" hidden>
                         <input type="text" value="{{i.product_price}}" name="amount" id="" hidden>
                         <button type="submit" style="background-color: transparent; border: none;"><i
                                 style="font-size:24px" class="fa">&#xf07a;</i></button>

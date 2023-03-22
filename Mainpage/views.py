@@ -92,8 +92,9 @@ def SearchPage(request):
     product_data = None
     if request.method == "POST":
         search = request.POST.get("query")
-        product_data = ProductData.objects.filter(product_name__icontains = search)
-        return render(request,"Mainpage/search.html",{"product_data":product_data,"search":search})
+        product_data = ProductData.objects.filter(product_name__icontains = search).values().all()
+        product_datas = ManageProducts(request,product_data)
+        return render(request,"Mainpage/search.html",{"product_data":product_datas,"search":search})
     return render(request,"Mainpage/search.html",{"product_data":product_data})
 
 def ContactPage(request):
@@ -146,33 +147,36 @@ def MyordersPage(request):
     return render(request,"Mainpage/orders.html")
 
 def CartPage(request):
-    user = request.user
-    cart_data = CartData.objects.filter(user_id = user.id).all().values()
-    cart_datas = CartData()
-    if request.method == "POST":
-        proid = request.POST.get("id")
-        qty = int(request.POST.get("qty"))
-        amount = int(request.POST.get("amount"))
-        cart_datas.product_id = proid
-        cart_datas.user_id = user.id
-        cart_datas.qty = qty
-        cart_datas.amount = amount * qty
-        cart_datas.save()
-        return redirect("/cart/")
-    mycartlist = []
-    total_price = 0
-    for i in cart_data:
-        mydic = {}
-        product_data = ProductData.objects.filter(id = i["product_id"]).values()[0]
-        mydic["id"] = i["id"]
-        mydic["p_img"] = product_data["product_img"]
-        mydic["p_name"] = product_data["product_name"]
-        mydic["qty"] = i["qty"]
-        mydic["P_price"] = i["amount"]
-        total_price = total_price + i["amount"]
-        mydic["date"] = i["date"]
-        mycartlist.append(mydic)
-    return render(request,"Mainpage/cart.html",{"cart_data":mycartlist,"total_price":total_price})
+    if request.user.is_authenticated == True:
+        user = request.user
+        cart_data = CartData.objects.filter(user_id = user.id).all().values()
+        cart_datas = CartData()
+        if request.method == "POST":
+            proid = request.POST.get("id")
+            qty = int(request.POST.get("qty"))
+            amount = int(request.POST.get("amount"))
+            cart_datas.product_id = proid
+            cart_datas.user_id = user.id
+            cart_datas.qty = qty
+            cart_datas.amount = amount * qty
+            cart_datas.save()
+            return redirect("/cart/")
+        mycartlist = []
+        total_price = 0
+        for i in cart_data:
+            mydic = {}
+            product_data = ProductData.objects.filter(id = i["product_id"]).values()[0]
+            mydic["id"] = i["id"]
+            mydic["p_img"] = product_data["product_img"]
+            mydic["p_name"] = product_data["product_name"]
+            mydic["qty"] = i["qty"]
+            mydic["P_price"] = i["amount"]
+            total_price = total_price + i["amount"]
+            mydic["date"] = i["date"]
+            mycartlist.append(mydic)
+        return render(request,"Mainpage/cart.html",{"cart_data":mycartlist,"total_price":total_price})
+    else:
+        return redirect("/login/")
 
 def DeleteItem(request):
     if request.method == "POST":

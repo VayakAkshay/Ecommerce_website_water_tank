@@ -62,15 +62,15 @@
             <form action="/edit-profile/" method="post">{% csrf_token %}
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">First Name</label>
-                    <input type="text" class="form-control" name="fname" required>
+                    <input type="text" class="form-control" value="{{user.first_name}}" name="fname" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" name="lname" required>
+                    <input type="text" value="{{user.last_name}}" class="form-control" name="lname" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" name="email" required>
+                    <input type="email" class="form-control" value="{{user.username}}" name="email" required>
                 </div>
                 <button type="submit" id="main_btn" class="btn btn-primary">Submit</button>
             </form>

@@ -102,14 +102,28 @@
                     <h5>₹ {{i.product_price}}</h5>
                 </div>
                 <div class="btnpart">
-                    <a href=""><i style="font-size:24px" class="fa">&#xf004;</i></a>
-                        <form action="/cart/" method="post">{% csrf_token %}
-                            <input type="text" value="{{i.id}}" name="id" id="" hidden>
-                            <input type="text" value="1" name="qty" id="" hidden>
-                            <input type="text" value="{{i.product_price}}" name="amount" id="" hidden>
-                            <button type="submit" style="background-color: transparent; border: none;"><i style="font-size:24px" class="fa">&#xf07a;</i></button>
-                        </form>
-                        <a href="/myproduct/{{i.id}}"><i style="font-size:24px" class="fa">&#xf0c9;</i></a>
+                    {% if user.is_authenticated %}
+                    {% if i.wish_status == True %}
+                    <a href="/wishlist/"><i style="font-size:24px; color: red;" class="fa">&#xf004;</i></a>
+                    {% else %}
+                    <form action="/wishlist/" method="post">{% csrf_token %}
+                        <input type="text" value="{{i.id}}" name="id" id="" hidden>
+                        <button type="submit" style="border: none; background-color: transparent;">
+                            <i style='font-size:24px' class='far'>&#xf004;</i>
+                        </button>
+                    </form>
+                    {% endif %}
+                    {% else %}
+                    <a href="/wishlist/"><i style="font-size:24px;" class="fa">&#xf004;</i></a>
+                    {% endif %}
+                    <form action="/cart/" method="post">{% csrf_token %}
+                        <input type="text" value="{{i.id}}" name="id" id="" hidden>
+                        <input type="number" value="1" name="qty" id="" hidden>
+                        <input type="text" value="{{i.product_price}}" name="amount" id="" hidden>
+                        <button type="submit" style="background-color: transparent; border: none;"><i
+                                style="font-size:24px" class="fa">&#xf07a;</i></button>
+                    </form>
+                    <a href="/myproduct/{{i.id}}"><i style="font-size:24px" class="fa">&#xf0c9;</i></a>
                 </div>
             </div>
             {% endfor %}

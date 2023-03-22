@@ -195,7 +195,7 @@
                 <div class="buybtn">
                     <form action="/cart/" method="post">{% csrf_token %}
                         <input type="text" value="{{i.id}}" name="id" id="" hidden>
-                        <input type="text" value="1" name="qty" id="qtys" hidden>
+                        <input type="number" value="1" name="qty" id="qtys" hidden>
                         <input type="text" value="{{i.product_price}}" name="amount" id="" hidden>
                         <button type="submit">Buy Now</button>
                     </form>
