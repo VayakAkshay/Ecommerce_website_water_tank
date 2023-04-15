@@ -22,11 +22,6 @@ class CartData(models.Model):
     qty = models.IntegerField(default=1)
     amount = models.IntegerField(default=0)
 
-class ContactData(models.Model):
-    contact_id = models.AutoField
-    contact_email = models.EmailField(max_length=200,default="")
-    contact_message = models.TextField(max_length=5000,default="")
-
 class WishlistData(models.Model):
     widhlist_id = models.AutoField
     product_id = models.IntegerField(default=0)

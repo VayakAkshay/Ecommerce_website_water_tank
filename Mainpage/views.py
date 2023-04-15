@@ -3,7 +3,7 @@ from django.contrib import messages
 from email.message import EmailMessage
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .models import ProductData,CartData,ContactData,WishlistData,ReviewData,OrderItem
+from .models import ProductData,CartData,WishlistData,ReviewData,OrderItem
 import stripe
 
 def Homepage(request):
@@ -97,8 +97,6 @@ def SearchPage(request):
         return render(request,"Mainpage/search.html",{"product_data":product_datas,"search":search})
     return render(request,"Mainpage/search.html",{"product_data":product_data})
 
-def ContactPage(request):
-    return render(request,"Mainpage/contact.html")
 
 def ProfilePage(request):
     return render(request,"Mainpage/profile.html")

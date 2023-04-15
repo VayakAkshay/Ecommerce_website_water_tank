@@ -25,7 +25,6 @@ urlpatterns = [
     path('products/',views.ProductPage,name="ProductPage"),
     path('myproduct/<id>',views.MyProduct,name="MyProduct"),
     path('search/',views.SearchPage,name="SearchPage"),
-    path('contact/',views.ContactPage,name="ContactPage"),
     path('cart/',views.CartPage,name="CartPage"),
     path('profile/',views.ProfilePage,name="ProfilePage"),
     path('deleteitem/',views.DeleteItem,name="DeleteItem"),
